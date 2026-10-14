@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Vision – Threat Intelligence (Live)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <div class="logo">&#9961;</div>
+        <div><b>Vision</b><small>THREAT INTELLIGENCE</small></div>
+      </div>
+      <div class="pills">
+        <span class="pill"><span class="dot live"></span>LIVE</span
+        ><span class="pill m" id="clock">--:--:--</span
+        ><span class="pill"
+          ><span class="dot" id="netdot"></span
+          ><span id="netlbl">Online</span></span
+        ><button class="pill" id="th" aria-label="Toggle theme">Theme</button>
+      </div>
+    </header>
+    <main>
+      <h1>Investigate before you trust.</h1>
+      <p class="lead">
+        Type a URL or IP and watch the verdict update keystroke by keystroke.
+        Analysis runs in your browser; nothing is uploaded or visited.
+      </p>
+      <section class="kpis" id="kpis"></section>
+      <div class="grid">
+        <section class="card">
+          <div class="pad">
+            <div class="mh">
+              <h3>Live analyzer</h3>
+              <span class="skip"
+                >Live preview as you type. Enter logs the scan.</span
+              >
+            </div>
+            <div class="seg" role="tablist">
+              <button role="tab" data-k="url" aria-selected="true">URL</button
+              ><button role="tab" data-k="ip" aria-selected="false">
+                IP address</button
+              ><button role="tab" data-k="file" aria-selected="false">
+                File
+              </button>
+            </div>
+            <div id="f-text">
+              <label for="inp" id="lbl">URL to investigate</label
+              ><input
+                type="text"
+                id="inp"
+                autocomplete="off"
+                spellcheck="false"
+              />
+            </div>
+            <div id="f-file" hidden>
+              <div class="drop" id="drop" tabindex="0">
+                Drop a file or click to choose<br /><small
+                  >EXE, DLL, PDF, ZIP, images, scripts, text. Up to 50 MB. Read
+                  in memory only, never executed.</small
+                >
+              </div>
+              <input type="file" id="fi" hidden />
+              <div class="hint" id="fn"></div>
+            </div>
+            <div class="chips" id="smp"></div>
+            <div class="err" id="err" role="alert"></div>
+          </div>
+          <div id="res">
+            <div class="top">
+              <div class="meter">
+                <svg width="112" height="112" viewBox="0 0 120 120">
+                  <circle class="tr" cx="60" cy="60" r="52" />
+                  <circle class="fg" id="fg" cx="60" cy="60" r="52" />
+                </svg>
+                <div><b id="num" data-v="0">0</b><small>/ 100</small></div>
+              </div>
+              <div class="tm">
+                <span class="verdict" id="vd">Waiting for input</span>
+                <div class="meta" id="meta"></div>
+              </div>
+            </div>
+            <div id="detail"></div>
+          </div>
+        </section>
+        <section class="card">
+          <div class="pad">
+            <div class="mh">
+              <h3>Your scan activity</h3>
+              <div class="ctl">
+                <button class="mini" id="clr">Clear</button>
+              </div>
+            </div>
+            <div class="hint" style="margin-bottom: 0">
+              Counts only the scans you run here. Click a row to reopen it.
+            </div>
+            <div id="alert">No malicious results yet.</div>
+            <div class="chart">
+              <svg
+                id="chart"
+                viewBox="0 0 300 96"
+                preserveAspectRatio="none"
+                role="img"
+                aria-label="Risk score of the last 40 scans"
+              ></svg>
+            </div>
+            <div class="dist" id="dist"></div>
+            <div id="sigs"></div>
+            <div class="chips" style="margin: 14px 0 0" id="flt">
+              <button class="mini" data-f="all" aria-pressed="true">All</button
+              ><button class="mini" data-f="threat" aria-pressed="false">
+                Suspicious + Malicious</button
+              ><button class="mini" data-f="mal" aria-pressed="false">
+                Malicious only
+              </button>
+            </div>
+          </div>
+          <div id="feed" data-f="all"></div>
+        </section>
+      </div>
+      <p class="skip" style="margin-top: 14px">
+        Local heuristic engine. WHOIS, DNS, TLS and reputation lookups are added
+        by the backend in the full build.
+      </p>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
